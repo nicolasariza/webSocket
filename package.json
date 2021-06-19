@@ -4,10 +4,12 @@
   "description": "",
   "main": "dist/app.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
     "@types/node": "^15.12.2",
     "nodemon": "^2.0.7",
