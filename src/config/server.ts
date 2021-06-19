@@ -1,13 +1,18 @@
 import express, { Application } from "express";
+import { createServer, Server as ServerHttp } from "http";
+import { Server as ServerIO } from "socket.io";
 import cors from "cors";
 class Server {
     private app: Application;
     private port: string;
+    private server: ServerHttp;
+    private io: ServerIO;
 
     constructor() {
         this.app = express()
         this.port = process.env.PORT || '4000';
-
+        this.server = createServer(this.app);
+        this.io = this.initSocket();
         this.middlewares()
     }
 
@@ -19,8 +24,12 @@ class Server {
         this.app.use( express.static('public'));
     }
 
+    private initSocket (): ServerIO {
+        return new ServerIO(this.server);
+     }
+
     listen() {
-        this.app.listen(this.port,()=>{
+        this.server.listen(this.port,()=>{
             console.log(`Application is running on port ${this.port}`);
         })
     }
