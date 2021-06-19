@@ -12,8 +12,9 @@
         <span id="labelOnline" hidden>Conecatdo</span>
         <span id="labelOffline" hidden>Desconectado</span>
     </p>
-    <input type="text" id="txtMessage">
+    <input type="text" id="txtMessage" onfocus="this.value=''">
     <button id="btnSend">Send</button>
+    <p id="message"></p>
     <script src="./socket.io/socket.io.js"></script>
     <script src="./js/socket-client.js"></script>
 </body>

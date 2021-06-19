@@ -31,14 +31,13 @@ class Server {
 
     sockets() {
         this.io.on("connection", (socket: Socket) => {
-            console.log('Client connected', socket.id);
-
             socket.on("disconnect",()=>{
                 console.log('Client disconnet', socket.id);
             });
 
-            socket.on('send-message', (payload)=>{
-                console.log(payload);
+            socket.on('send-message', (payload, callback)=>{
+                callback('msg send with id 12345');
+                this.io.emit('send-message', payload);
             });
         });
     }
