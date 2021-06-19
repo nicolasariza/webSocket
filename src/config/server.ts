@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import { createServer, Server as ServerHttp } from "http";
-import { Server as ServerIO } from "socket.io";
+import { Server as ServerIO, Socket } from "socket.io";
 import cors from "cors";
 class Server {
     private app: Application;
@@ -13,7 +13,8 @@ class Server {
         this.port = process.env.PORT || '4000';
         this.server = createServer(this.app);
         this.io = this.initSocket();
-        this.middlewares()
+        this.middlewares();
+        this.sockets();
     }
 
     middlewares(){
@@ -26,9 +27,19 @@ class Server {
 
     private initSocket (): ServerIO {
         return new ServerIO(this.server);
-     }
+    }
 
-    listen() {
+    sockets() {
+        this.io.on("connection", (socket: Socket) => {
+            console.log('Client connected', socket.id);
+
+            socket.on("disconnect",()=>{
+                console.log('Client disconnet', socket.id);
+            })
+        });
+    }
+
+    public listen() {
         this.server.listen(this.port,()=>{
             console.log(`Application is running on port ${this.port}`);
         })
