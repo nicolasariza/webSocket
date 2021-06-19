@@ -19,7 +19,8 @@
     "typescript": "^4.3.4"
   },
   "scripts": {
-    "dev": "tsc -w & nodemon dist/app.ts"
+    "dev": "tsc -w & nodemon dist/app.js",
+    "build": "tsc & node dist/app.js"
   },
   "repository": {
     "type": "git",
