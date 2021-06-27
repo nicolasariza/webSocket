@@ -1,5 +1,5 @@
 {
-  "name": "webSocket",
+  "name": "web-socket",
   "version": "1.0.0",
   "description": "",
   "main": "dist/app.js",
